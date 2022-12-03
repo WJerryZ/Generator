@@ -27,20 +27,31 @@ END_MESSAGE_MAP()
 
 BOOL CMyApp::InitInstance(void)
 {
-    HICON hIcon = LoadIcon(IDI_ICON1);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+    m_hIcon = LoadIcon(IDI_ICON1);
     CMyFrameWnd* pWnd = new CMyFrameWnd(this);
     m_pMainWnd = pWnd;
-    m_pMainWnd->SetIcon(hIcon, FALSE);
+    m_pMainWnd->SetIcon(m_hIcon, FALSE);
+    m_pMainWnd->SetIcon(m_hIcon, TRUE);
     m_pMainWnd->ShowWindow(SW_NORMAL);
     m_pMainWnd->UpdateWindow();
+
+    RECT rect;
+    int iHeight = GetSystemMetrics(SM_CYFULLSCREEN);
+    m_pMainWnd->GetWindowRect(&rect);
+    m_pMainWnd->SetWindowPos(
+        m_pMainWnd, rect.left, iHeight - rect.top - (rect.bottom - rect.top),
+        NULL, NULL, (SWP_NOSIZE | SWP_NOREDRAW | SWP_NOZORDER)
+    );
 
     // нд╠╬©Р
     {
         m_pInputEdit = new CMyEdit((WS_CHILD | WS_BORDER | WS_VISIBLE | ES_CENTER | ES_NUMBER | ES_READONLY),
-            CRect(100, 10, 100 + 100, 10 + 50), pWnd, IDC_INPUTEDIT);
+            CRect(90, 10, 90 + 100, 10 + 50), pWnd, IDC_INPUTEDIT);
 
         m_pOutputEdit = new CMyEdit((WS_CHILD | WS_BORDER | WS_VISIBLE | ES_CENTER| ES_NUMBER | ES_READONLY),
-            CRect(100, 90, 100 + 100, 90 + 50), pWnd, IDC_OUTPUTEDIT);
+            CRect(90, 90, 90 + 100, 90 + 50), pWnd, IDC_OUTPUTEDIT);
     }
 
 
