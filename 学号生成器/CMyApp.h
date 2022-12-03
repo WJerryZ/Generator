@@ -52,12 +52,15 @@ public:
     class CMyEdit* m_pInputEdit;
     class CMyEdit* m_pOutputEdit;
 
+    HICON m_hIcon;
+
     int iData = 0;
     CString strData;
 
     int iRes = 0;
     CString strRes;
 
+    std::default_random_engine random_engine;
     std::vector<bool> vSet;
 
     virtual BOOL InitInstance(void);
