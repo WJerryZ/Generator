@@ -52,6 +52,8 @@ public:
     class CMyEdit* m_pInputEdit;
     class CMyEdit* m_pOutputEdit;
 
+    HICON m_hIcon;
+
     int iData = 0;
     CString strData;
 

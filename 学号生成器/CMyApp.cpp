@@ -27,66 +27,69 @@ END_MESSAGE_MAP()
 
 BOOL CMyApp::InitInstance(void)
 {
-    HICON hIcon = LoadIcon(IDI_ICON1);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+    m_hIcon = LoadIcon(IDI_ICON1);
     CMyFrameWnd* pWnd = new CMyFrameWnd(this);
     m_pMainWnd = pWnd;
-    m_pMainWnd->SetIcon(hIcon, FALSE);
+    m_pMainWnd->SetIcon(m_hIcon, FALSE);
+    m_pMainWnd->SetIcon(m_hIcon, TRUE);
     m_pMainWnd->ShowWindow(SW_NORMAL);
     m_pMainWnd->UpdateWindow();
 
     // 文本框
     {
         m_pInputEdit = new CMyEdit((WS_CHILD | WS_BORDER | WS_VISIBLE | ES_CENTER | ES_NUMBER | ES_READONLY),
-            CRect(100, 10, 100 + 100, 10 + 50), pWnd, IDC_INPUTEDIT);
+            CRect(90, 10, 90 + 100, 10 + 50), pWnd, IDC_INPUTEDIT);
 
         m_pOutputEdit = new CMyEdit((WS_CHILD | WS_BORDER | WS_VISIBLE | ES_CENTER| ES_NUMBER | ES_READONLY),
-            CRect(100, 90, 100 + 100, 90 + 50), pWnd, IDC_OUTPUTEDIT);
+            CRect(90, 90, 90 + 100, 90 + 50), pWnd, IDC_OUTPUTEDIT);
     }
 
 
     // 数字键
     {
         m_pButton1 = new CMyButton(TEXT("1"), WS_MYBUTTON,
-            CRect(X[0], Y[0], X[0] + W, Y[0] + H), 120, m_pMainWnd, IDC_BUTTON1);
+            CRect(X[0], Y[0], X[0] + W, Y[0] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON1);
 
         m_pButton2 = new CMyButton(TEXT("2"), WS_MYBUTTON,
-            CRect(X[1], Y[0], X[1] + W, Y[0] + H), 120, m_pMainWnd, IDC_BUTTON2);
+            CRect(X[1], Y[0], X[1] + W, Y[0] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON2);
 
         m_pButton3 = new CMyButton(TEXT("3"), WS_MYBUTTON,
-            CRect(X[2], Y[0], X[2] + W, Y[0] + H), 120, m_pMainWnd, IDC_BUTTON3);
+            CRect(X[2], Y[0], X[2] + W, Y[0] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON3);
 
         m_pButton4 = new CMyButton(TEXT("4"), WS_MYBUTTON,
-            CRect(X[0], Y[1], X[0] + W, Y[1] + H), 120, m_pMainWnd, IDC_BUTTON4);
+            CRect(X[0], Y[1], X[0] + W, Y[1] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON4);
 
         m_pButton5 = new CMyButton(TEXT("5"), WS_MYBUTTON,
-            CRect(X[1], Y[1], X[1] + W, Y[1] + H), 120, m_pMainWnd, IDC_BUTTON5);
+            CRect(X[1], Y[1], X[1] + W, Y[1] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON5);
 
         m_pButton6 = new CMyButton(TEXT("6"), WS_MYBUTTON,
-            CRect(X[2], Y[1], X[2] + W, Y[1] + H), 120, m_pMainWnd, IDC_BUTTON6);
+            CRect(X[2], Y[1], X[2] + W, Y[1] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON6);
 
         m_pButton7 = new CMyButton(TEXT("7"), WS_MYBUTTON,
-            CRect(X[0], Y[2], X[0] + W, Y[2] + H), 120, m_pMainWnd, IDC_BUTTON7);
+            CRect(X[0], Y[2], X[0] + W, Y[2] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON7);
 
         m_pButton8 = new CMyButton(TEXT("8"), WS_MYBUTTON,
-            CRect(X[1], Y[2], X[1] + W, Y[2] + H), 120, m_pMainWnd, IDC_BUTTON8);
+            CRect(X[1], Y[2], X[1] + W, Y[2] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON8);
 
         m_pButton9 = new CMyButton(TEXT("9"), WS_MYBUTTON,
-            CRect(X[2], Y[2], X[2] + W, Y[2] + H), 120, m_pMainWnd, IDC_BUTTON9);
+            CRect(X[2], Y[2], X[2] + W, Y[2] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON9);
 
         m_pButton0 = new CMyButton(TEXT("0"), WS_MYBUTTON,
-            CRect(X[0], Y[3], X[0] + W, Y[3] + H), 120, m_pMainWnd, IDC_BUTTON0);
+            CRect(X[0], Y[3], X[0] + W, Y[3] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTON0);
 
         m_pButtonBack = new CMyButton(TEXT("←"), WS_MYBUTTON,
-            CRect(X[1], Y[3], X[1] + 110, Y[3] + H), 120, m_pMainWnd, IDC_BUTTONBACK);
+            CRect(X[1], Y[3], X[1] + 110, Y[3] + H), FONT_SIZE, m_pMainWnd, IDC_BUTTONBACK);
 
         m_pButtonGen = new CMyButton(TEXT("生成"), WS_MYBUTTON | WS_DISABLED,
-            CRect(210, 90, 210 + 90, 90 + 50), 120, m_pMainWnd, IDC_BUTTONGEN);
+            CRect(210, 90, 210 + 90, 90 + 50), FONT_SIZE, m_pMainWnd, IDC_BUTTONGEN);
 
         m_pButtonOK = new CMySwitchButton(TEXT("确定"), WS_MYBUTTON,
-            CRect(210, 10, 210 + 90, 10 + 50), 120, m_pMainWnd, IDC_BUTTONOK);
+            CRect(210, 10, 210 + 90, 10 + 50), FONT_SIZE, m_pMainWnd, IDC_BUTTONOK);
 
         m_pButtonSet = new CMySwitchButton(TEXT("是"), WS_MYBUTTON,
-            CRect(210, 170, 210 + 90, 170 + 50), 120, m_pMainWnd, IDC_BUTTONSET);
+            CRect(210, 170, 210 + 90, 170 + 50), FONT_SIZE, m_pMainWnd, IDC_BUTTONSET);
     }
 
 

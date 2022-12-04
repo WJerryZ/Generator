@@ -18,6 +18,7 @@ public:
     CMyEdit(DWORD dwStyle, const RECT& rect, class CMyFrameWnd* pParentWnd, UINT nID);
 
     virtual ~CMyEdit();
+
     DECLARE_MESSAGE_MAP()
         afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 };

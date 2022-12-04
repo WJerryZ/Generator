@@ -8,7 +8,9 @@ END_MESSAGE_MAP()
 CMyEdit::CMyEdit(DWORD dwStyle, const RECT& rect, class CMyFrameWnd* pParentWnd, UINT nID)
 {
 	Create(dwStyle, rect, pParentWnd, nID);
-	m_Font.CreatePointFont(120, TEXT("Segoe UI"), NULL);
+	m_Font.CreateFont(FONT_SIZE, 0, 0, 0, 400, FALSE, FALSE, FALSE, 
+		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+		PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS,TEXT("Segoe UI"));
 	SetFont(&m_Font);
 	m_pApp = pParentWnd->m_pApp;
 }

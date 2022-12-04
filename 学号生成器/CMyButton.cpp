@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "CMyButton.h"
 
-CMyButton::CMyButton(LPCTSTR lpszCaption, DWORD dwStyle, const RECT& rect, int nPointSize, CWnd* pParentWnd, UINT nID)
+CMyButton::CMyButton(LPCTSTR lpszCaption, DWORD dwStyle, const RECT& rect, int nFontSize, CWnd* pParentWnd, UINT nID)
 	: CButton()
 {
 	Create(lpszCaption, dwStyle, rect, pParentWnd, nID);
-	m_cfFont.CreatePointFont(nPointSize, TEXT("Segoe UI"), NULL);
+    m_cfFont.CreateFont(nFontSize, 0, 0, 0, 400, FALSE, FALSE, FALSE,
+        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+        PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, TEXT("Segoe UI"));
 	SetFont(&m_cfFont);
 }
 
