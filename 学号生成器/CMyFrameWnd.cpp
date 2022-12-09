@@ -11,12 +11,15 @@ BEGIN_MESSAGE_MAP(CMyFrameWnd, CFrameWnd)
 	ON_WM_LBUTTONDBLCLK()
 	ON_WM_MOVE()
 	ON_WM_LBUTTONDOWN()
+
+	ON_WM_NCLBUTTONDBLCLK()
+
 END_MESSAGE_MAP()
 
 CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp)
 	: m_pApp(pApp)
 {
-	Create(NULL, TEXT("Ñ§ºÅÉú³ÉÆ÷"), WS_SYSMENU,
+	Create(NULL, TEXT("å­¦å·ç”Ÿæˆå™¨"), WS_SYSMENU,
 		CRect(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT + 510, CW_USEDEFAULT + 250));
 
 	RECT rect;
@@ -27,7 +30,6 @@ CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp)
 		250 * 2 - (rect.bottom - rect.top),
 		(SWP_NOMOVE | SWP_NOREDRAW | SWP_NOZORDER)
 	);
-
 
 	m_Font.CreateFont(FONT_SIZE, 0, 0, 0, 400, FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
@@ -78,9 +80,9 @@ void CMyFrameWnd::OnPaint()
 	CPaintDC dc(this);
 	dc.SelectObject(m_Font);
 	dc.SetBkMode(TRANSPARENT);
-	dc.DrawText(TEXT("ÈËÊý:"), -1, CRect(20, 10, 110, 60),  (DT_SINGLELINE | DT_VCENTER));
-	dc.DrawText(TEXT("½á¹û:"), -1, CRect(20, 90, 110, 140), (DT_SINGLELINE | DT_VCENTER));
-	dc.DrawText(TEXT("ÔÊÐíÖØ¸´³éÈ¡:"), -1, CRect(20, 170, 230, 220), (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("äººæ•°:"), -1, CRect(20, 10, 110, 60),  (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("ç»“æžœ:"), -1, CRect(20, 90, 110, 140), (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("å…è®¸é‡å¤æŠ½å–:"), -1, CRect(20, 170, 230, 220), (DT_SINGLELINE | DT_VCENTER));
 }
 
 void CMyFrameWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
@@ -127,7 +129,7 @@ END_MESSAGE_MAP()
 CMySmallWnd::CMySmallWnd(CMyFrameWnd* pFrameWnd)
 	: m_pFrameWnd(pFrameWnd)
 {
-	Create(NULL, TEXT("Ñ§ºÅÉú³ÉÆ÷Ðü¸¡´°"), WS_POPUP, CRect(0, 0, 64, 64));
+	Create(NULL, TEXT("å­¦å·ç”Ÿæˆå™¨æ‚¬æµ®çª—"), WS_POPUP, CRect(0, 0, 64, 64));
 	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
 
 	::SetWindowPos(
@@ -136,7 +138,7 @@ CMySmallWnd::CMySmallWnd(CMyFrameWnd* pFrameWnd)
 	);
 
 	::SetWindowLong(GetSafeHwnd(), GWL_EXSTYLE, ::GetWindowLongPtr(GetSafeHwnd(), GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(0, (255 * 50) / 100, LWA_ALPHA);
+	SetLayeredWindowAttributes(0, (255 * 60) / 100, LWA_ALPHA);
 }
 
 void CMySmallWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
@@ -173,5 +175,12 @@ void CMySmallWnd::OnPaint()
 {
 	CPaintDC dc(this);
 	dc.SetBkMode(TRANSPARENT);
-	::DrawIconEx(dc.GetSafeHdc(), 6, 6, m_pFrameWnd->m_pApp->m_hIcon, 0, 0, 0, NULL, DI_NORMAL | DI_COMPAT | DI_DEFAULTSIZE);
+	::DrawIconEx(dc.GetSafeHdc(), 5, 5, m_pFrameWnd->m_pApp->m_hIcon, 52, 52, 0, NULL, DI_NORMAL | DI_COMPAT);
+}
+
+
+void CMyFrameWnd::OnNcLButtonDblClk(UINT nHitTest, CPoint point)
+{
+	CFrameWnd::OnNcLButtonDblClk(nHitTest, point);
+	PostMessage(WM_LBUTTONDBLCLK, HTCLIENT, MAKELPARAM(point.x, point.y));
 }

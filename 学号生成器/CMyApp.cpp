@@ -37,6 +37,14 @@ BOOL CMyApp::InitInstance(void)
     m_pMainWnd->ShowWindow(SW_NORMAL);
     m_pMainWnd->UpdateWindow();
 
+    RECT rect;
+    int iHeight = GetSystemMetrics(SM_CYFULLSCREEN);
+    m_pMainWnd->GetWindowRect(&rect);
+    m_pMainWnd->SetWindowPos(
+        m_pMainWnd, rect.left, iHeight - rect.top - (rect.bottom - rect.top),
+        NULL, NULL, (SWP_NOSIZE | SWP_NOREDRAW | SWP_NOZORDER)
+    );
+
     // нд╠╬©Р
     {
         m_pInputEdit = new CMyEdit((WS_CHILD | WS_BORDER | WS_VISIBLE | ES_CENTER | ES_NUMBER | ES_READONLY),
