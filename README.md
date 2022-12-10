@@ -17,6 +17,8 @@
 
 * 图标为江苏省苏州中学附属苏州湾学校校徽（是不可以胡乱用的）
 
+* 你可以从[这里](https://github.com/WJerryZ/Generator/releases/)获取程序
+
 ---
 
 ## 技术性说明
