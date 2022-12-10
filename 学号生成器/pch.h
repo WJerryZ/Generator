@@ -21,9 +21,6 @@
 
 #include <afxwin.h>
 
-#include <Gdiplus.h>
-#pragma comment(lib, "Gdiplus.lib")
-
 #include <vector>
 #include <random>
 
