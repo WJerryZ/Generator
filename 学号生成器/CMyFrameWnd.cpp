@@ -2,6 +2,7 @@
 #include "CMyFrameWnd.h"
 
 
+
 //// class CMyFrameWnd : public CFrameWnd
 
 BEGIN_MESSAGE_MAP(CMyFrameWnd, CFrameWnd)
@@ -16,6 +17,7 @@ CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp)
 	: m_pApp(pApp)
 {
 	Create(NULL, TEXT("Ñ§ºÅÉú³ÉÆ÷"), WS_SYSMENU, 
+
 		CRect(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT + 510, CW_USEDEFAULT + 250));
 
 	RECT rect;
