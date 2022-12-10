@@ -27,10 +27,8 @@ public:
         afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
         afx_msg void OnPaint();
         afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
-        afx_msg void OnMove(int x, int y);
         afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
         afx_msg void OnNcLButtonDblClk(UINT nHitTest, CPoint point);
-
 };
 
 class CMySmallWnd :
@@ -48,7 +46,6 @@ public:
 
     DECLARE_MESSAGE_MAP()
         afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
-        afx_msg void OnMove(int x, int y);
         afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
         afx_msg void OnPaint();
 };

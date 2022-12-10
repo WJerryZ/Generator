@@ -251,8 +251,7 @@ void CMyApp::OnButtonGenClicked(void)
 {
     if (iData != 0)
     {
-        iRes = std::chrono::duration_cast<std::chrono::microseconds>
-            (std::chrono::high_resolution_clock::now().time_since_epoch()).count() % iData + 1;
+        iRes = random_engine() % iData + 1;
 
         if(m_pButtonSet->m_bState != TRUE)
         {

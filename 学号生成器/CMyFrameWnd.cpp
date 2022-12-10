@@ -9,17 +9,15 @@ BEGIN_MESSAGE_MAP(CMyFrameWnd, CFrameWnd)
 	ON_WM_KEYDOWN()
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDBLCLK()
-	ON_WM_MOVE()
 	ON_WM_LBUTTONDOWN()
-
 	ON_WM_NCLBUTTONDBLCLK()
-
 END_MESSAGE_MAP()
 
-CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp)
+CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp) 
 	: m_pApp(pApp)
 {
-	Create(NULL, TEXT("学号生成器"), WS_SYSMENU,
+	Create(NULL, TEXT("学号生成器"), WS_SYSMENU, 
+
 		CRect(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT + 510, CW_USEDEFAULT + 250));
 
 	RECT rect;
@@ -90,24 +88,19 @@ void CMyFrameWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
 	m_bVisible = FALSE;
 	m_pSmallWnd->m_bVisible = TRUE;
 
-	m_pSmallWnd->ShowWindow(SW_NORMAL);
-	m_pSmallWnd->UpdateWindow();
-
 	ShowWindow(SW_HIDE);
 	UpdateWindow();
+
+	RECT rect;
+	GetWindowRect(&rect);
+	m_pSmallWnd->SetWindowPos(m_pSmallWnd, rect.left, rect.top, 0, 0, (SWP_NOSIZE | SWP_NOZORDER | SWP_NOREDRAW));
+
+	m_pSmallWnd->ShowWindow(SW_NORMAL);
+	m_pSmallWnd->UpdateWindow();
 
 	CFrameWnd::OnLButtonDblClk(nFlags, point);
 }
 
-void CMyFrameWnd::OnMove(int x, int y)
-{
-	CFrameWnd::OnMove(x, y);
-
-	if (m_bVisible)
-	{
-		m_pSmallWnd->SetWindowPos(m_pSmallWnd, x, y, 0, 0, (SWP_NOSIZE | SWP_NOZORDER | SWP_NOREDRAW));
-	}
-}
 
 void CMyFrameWnd::OnLButtonDown(UINT nFlags, CPoint point)
 {
@@ -116,12 +109,19 @@ void CMyFrameWnd::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
+void CMyFrameWnd::OnNcLButtonDblClk(UINT nHitTest, CPoint point)
+{
+	CFrameWnd::OnNcLButtonDblClk(nHitTest, point);
+	PostMessage(WM_LBUTTONDBLCLK, HTCLIENT, MAKELPARAM(point.x, point.y));
+}
+
+
+
 
 //// class CMySmallWnd : public CFrameWnd
 
 BEGIN_MESSAGE_MAP(CMySmallWnd, CFrameWnd)
 	ON_WM_LBUTTONDBLCLK()
-	ON_WM_MOVE()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
@@ -129,7 +129,7 @@ END_MESSAGE_MAP()
 CMySmallWnd::CMySmallWnd(CMyFrameWnd* pFrameWnd)
 	: m_pFrameWnd(pFrameWnd)
 {
-	Create(NULL, TEXT("学号生成器悬浮窗"), WS_POPUP, CRect(0, 0, 64, 64));
+	Create(NULL, TEXT("悬浮窗"), WS_POPUP, CRect(0, 0, 64, 64));
 	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
 
 	::SetWindowPos(
@@ -149,19 +149,14 @@ void CMySmallWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
 	ShowWindow(SW_HIDE);
 	UpdateWindow();
 
+	RECT rect;
+	GetWindowRect(&rect);
+	m_pFrameWnd->SetWindowPos(m_pFrameWnd, rect.left, rect.top, 0, 0, (SWP_NOSIZE | SWP_NOZORDER | SWP_NOREDRAW));
+
 	m_pFrameWnd->ShowWindow(SW_NORMAL);
 	m_pFrameWnd->UpdateWindow();
+
 	CFrameWnd::OnLButtonDblClk(nFlags, point);
-}
-
-void CMySmallWnd::OnMove(int x, int y)
-{
-	CFrameWnd::OnMove(x, y);
-
-	if (m_bVisible)
-	{
-		m_pFrameWnd->SetWindowPos(m_pFrameWnd, x, y, 0, 0, (SWP_NOSIZE | SWP_NOZORDER | SWP_NOREDRAW));
-	}
 }
 
 void CMySmallWnd::OnLButtonDown(UINT nFlags, CPoint point)
@@ -176,11 +171,4 @@ void CMySmallWnd::OnPaint()
 	CPaintDC dc(this);
 	dc.SetBkMode(TRANSPARENT);
 	::DrawIconEx(dc.GetSafeHdc(), 5, 5, m_pFrameWnd->m_pApp->m_hIcon, 52, 52, 0, NULL, DI_NORMAL | DI_COMPAT);
-}
-
-
-void CMyFrameWnd::OnNcLButtonDblClk(UINT nHitTest, CPoint point)
-{
-	CFrameWnd::OnNcLButtonDblClk(nHitTest, point);
-	PostMessage(WM_LBUTTONDBLCLK, HTCLIENT, MAKELPARAM(point.x, point.y));
 }

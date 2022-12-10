@@ -25,7 +25,7 @@
 #pragma comment(lib, "Gdiplus.lib")
 
 #include <vector>
-#include <chrono>
+#include <random>
 
 #include "resource.h"
 

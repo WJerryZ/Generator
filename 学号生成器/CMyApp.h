@@ -60,6 +60,7 @@ public:
     int iRes = 0;
     CString strRes;
 
+    std::default_random_engine random_engine;
     std::vector<bool> vSet;
 
     virtual BOOL InitInstance(void);
