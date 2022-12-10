@@ -126,6 +126,8 @@ CMyApp::~CMyApp()
 
     delete m_pInputEdit;
     delete m_pOutputEdit;
+
+    delete m_pDist;
 }
 
 void CMyApp::OnButton1Clicked(void)
@@ -251,7 +253,7 @@ void CMyApp::OnButtonGenClicked(void)
 {
     if (iData != 0)
     {
-        iRes = random_engine() % iData + 1;
+        iRes = m_pDist->operator()(m_rdRand);
 
         if(m_pButtonSet->m_bState != TRUE)
         {
@@ -327,6 +329,9 @@ void CMyApp::OnButtonOKClicked(void)
         );
         
         ::SetWindowPos(m_pMainWnd->m_hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+
+        delete m_pDist;
+        m_pDist = new std::uniform_int_distribution<>(iData > 0, iData);
 
         vSet.resize(0);
         vSet.resize(iData + 1, false);

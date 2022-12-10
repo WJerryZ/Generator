@@ -60,7 +60,8 @@ public:
     int iRes = 0;
     CString strRes;
 
-    std::default_random_engine random_engine;
+    std::random_device               m_rdRand;
+    std::uniform_int_distribution<>* m_pDist;
     std::vector<bool> vSet;
 
     virtual BOOL InitInstance(void);
