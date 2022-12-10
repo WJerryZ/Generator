@@ -16,7 +16,7 @@ END_MESSAGE_MAP()
 CMyFrameWnd::CMyFrameWnd(class CMyApp* pApp) 
 	: m_pApp(pApp)
 {
-	Create(NULL, TEXT("Â≠¶Âè∑ÁîüÊàêÂô®"), WS_SYSMENU, 
+	Create(NULL, TEXT("—ß∫≈…˙≥…∆˜"), WS_SYSMENU, 
 
 		CRect(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT + 510, CW_USEDEFAULT + 250));
 
@@ -78,9 +78,9 @@ void CMyFrameWnd::OnPaint()
 	CPaintDC dc(this);
 	dc.SelectObject(m_Font);
 	dc.SetBkMode(TRANSPARENT);
-	dc.DrawText(TEXT("‰∫∫Êï∞:"), -1, CRect(20, 10, 110, 60),  (DT_SINGLELINE | DT_VCENTER));
-	dc.DrawText(TEXT("ÁªìÊûú:"), -1, CRect(20, 90, 110, 140), (DT_SINGLELINE | DT_VCENTER));
-	dc.DrawText(TEXT("ÂÖÅËÆ∏ÈáçÂ§çÊäΩÂèñ:"), -1, CRect(20, 170, 230, 220), (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("»À ˝:"), -1, CRect(20, 10, 110, 60),  (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("Ω·π˚:"), -1, CRect(20, 90, 110, 140), (DT_SINGLELINE | DT_VCENTER));
+	dc.DrawText(TEXT("‘ –Ì÷ÿ∏¥≥È»°:"), -1, CRect(20, 170, 230, 220), (DT_SINGLELINE | DT_VCENTER));
 }
 
 void CMyFrameWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
@@ -129,7 +129,7 @@ END_MESSAGE_MAP()
 CMySmallWnd::CMySmallWnd(CMyFrameWnd* pFrameWnd)
 	: m_pFrameWnd(pFrameWnd)
 {
-	Create(NULL, TEXT("ÊÇ¨ÊµÆÁ™ó"), WS_POPUP, CRect(0, 0, 64, 64));
+	Create(NULL, TEXT("–¸∏°¥∞"), WS_POPUP, CRect(0, 0, 64, 64));
 	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
 
 	::SetWindowPos(
